@@ -56,3 +56,34 @@ export const registerSchema = joi.object({
     .message("The password should be less than 20 symbols")
     .required(),
 });
+
+export const addTripSchema = joi.object({
+  to: joi
+    .string()
+    .min(4)
+    .message("The Begin Point should be more than 4 symbols")
+    .max(20)
+    .message("The Begin Point should be less than 20 symbols")
+    .required(),
+  from: joi
+    .string()
+    .min(4)
+    .message("The From Point should be more than 4 symbols")
+    .max(20)
+    .message("The From Point should be less than 20 symbols")
+    .required(),
+  countOfPassengers: joi
+    .number()
+    .integer()
+    .message("The count of passengers must be integer")
+    .positive()
+    .message("The count of passengers must be positive number")
+    .min(1)
+    .message("The count of passengers should be more than or equal 1")
+    .required(),
+  tripID: joi
+    .string()
+    .required()
+    .min(5)
+    .message("The trip ID should be more than 5 symbols"),
+});

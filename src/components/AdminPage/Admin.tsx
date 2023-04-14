@@ -7,11 +7,13 @@ import { selectUsers, selectUsersLoading } from "@src/store/users/selectors";
 import React, { useEffect } from "react";
 import { Table } from "react-bootstrap";
 import Select from "react-select";
+import Loader from "../shared/Loader/Loader";
 
 const Admin: React.FC = () => {
   const usersLoading = useAppSelector(selectUsersLoading);
   const users = useAppSelector(selectUsers);
   const user = useAppSelector(selectUser);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -20,7 +22,7 @@ const Admin: React.FC = () => {
     }
   }, []);
 
-  if (usersLoading) return <div>Loading...</div>;
+  if (usersLoading) return <Loader />;
 
   const selectNewRole = async (
     userID: string,
@@ -39,7 +41,7 @@ const Admin: React.FC = () => {
 
   return (
     <div className="d-flex flex-column w-100 py-3 pe-3">
-      <p>Editing Users</p>
+      <p className="page-title">Editing Users</p>
       <Table striped="columns">
         <thead>
           <tr>
