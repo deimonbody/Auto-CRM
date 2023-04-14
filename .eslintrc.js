@@ -67,7 +67,8 @@ module.exports = {
         "import/no-cycle":"off",
         "jsx-a11y/label-has-associated-control":"off",
         "no-extra-boolean-cast":"off",
-        "react/no-unstable-nested-components":"off"
+        "react/no-unstable-nested-components":"off",
+        "import/no-extraneous-dependencies":"off"
     },
     "settings": {
         "import/resolver": {

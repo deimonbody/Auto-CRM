@@ -1,0 +1,32 @@
+.form{
+    min-width: 500px;
+}
+
+.form__label {
+    font-size:0.7rem;
+    font-family: "Montserrat-bold";
+}
+
+.form__input {
+    font-size: 0.8rem !important;
+}
+.form__error {
+        font-size: 0.7rem;
+        font-family: "Montserrat-bold";
+}
+
+.form__title {
+    font-family: "Montserrat-bold";
+}
+
+.form__button {
+    font-size: 0.9rem !important;
+    font-family: "Montserrat-bold" !important;
+    padding:8px 18px !important;
+}
+
+.form__google-text{
+    font-family: "Montserrat-bold";
+    font-size: 0.8rem;
+    cursor: pointer;
+}
