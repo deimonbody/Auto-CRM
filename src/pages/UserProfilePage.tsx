@@ -1,7 +1,7 @@
 import UserProfile from "@src/components/UserProfilePage/UserProfile";
 import React from "react";
 
-const UserProfilePage = () => {
+const UserProfilePage: React.FC = () => {
   return <UserProfile />;
 };
 

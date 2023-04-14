@@ -1,9 +1,10 @@
 import { useAppSelector } from "@src/store/hooks";
 import { selectTrips } from "@src/store/trips/selectors";
 import React, { useState } from "react";
-import { Button, Table } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import Loader from "../shared/Loader/Loader";
 import AddTripModal from "./components/AddTripModal";
+import TripsTable from "./components/TripsTable";
 
 const Trips: React.FC = () => {
   const trips = useAppSelector(selectTrips);
@@ -24,25 +25,7 @@ const Trips: React.FC = () => {
       >
         Add Trip
       </Button>
-      <Table striped="columns">
-        <thead>
-          <tr>
-            <th>Trip ID</th>
-            <th>Count of Passangers</th>
-            <th>From</th>
-            <th>To</th>
-          </tr>
-          {trips.map((el) => (
-            <tr key={el.tripID}>
-              <td>{el.tripID}</td>
-              <td>{el.countOfPassengers}</td>
-              <td>{el.from}</td>
-              <td>{el.to}</td>
-            </tr>
-          ))}
-        </thead>
-        <tbody />
-      </Table>
+      <TripsTable trips={trips} />
       {isOpenModal ? <AddTripModal closeHandler={closeModal} /> : null}
     </div>
   );

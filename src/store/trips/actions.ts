@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { TripService } from "@src/services/trisp.service";
+import { TripService } from "@src/services/trips.service";
 import { ITrip } from "@src/common/interface";
 import { TripsActions } from "./common";
 
