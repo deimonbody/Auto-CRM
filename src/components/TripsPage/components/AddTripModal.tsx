@@ -8,6 +8,7 @@ import { addNewTrip } from "@src/store/trips/actions";
 import React from "react";
 import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 interface IProps {
   closeHandler: () => void;
@@ -28,7 +29,11 @@ const AddTripModal: React.FC<IProps> = ({ closeHandler }) => {
   });
 
   const saveHandler = (data: ITrip) => {
-    dispatch(addNewTrip(data));
+    closeHandler();
+    dispatch(addNewTrip(data))
+      .unwrap()
+      .then(() => toast.success("Success,the trip was added"))
+      .catch(() => toast.error("Something went wrong :("));
     reset();
   };
 

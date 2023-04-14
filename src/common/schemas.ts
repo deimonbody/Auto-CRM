@@ -1,9 +1,14 @@
 import joi from "joi";
 
 export const loginSchema = joi.object({
-  email: joi.string().required().messages({
-    "string.empty": "The field email shouldn`t be empty",
-  }),
+  email: joi
+    .string()
+    .email({ tlds: { allow: false } })
+    .required()
+    .label("Email")
+    .messages({
+      "string.empty": "The email shouldn`t be empty",
+    }),
   password: joi
     .string()
     .min(6)
@@ -45,9 +50,14 @@ export const registerSchema = joi.object({
     .max(100)
     .message("The age should be less than 100")
     .required(),
-  email: joi.string().required().messages({
-    "string.empty": "The field email shouldn`t be empty",
-  }),
+  email: joi
+    .string()
+    .email({ tlds: { allow: false } })
+    .required()
+    .label("Email")
+    .messages({
+      "string.empty": "The email shouldn`t be empty",
+    }),
   password: joi
     .string()
     .min(6)

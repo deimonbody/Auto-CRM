@@ -1,4 +1,4 @@
-import { ROLE, UserRole } from "./enum";
+import { PATHES, ROLE, UserRole } from "./enum";
 
 export interface IUser {
   firstName: string;
@@ -14,4 +14,10 @@ export interface ITrip {
   from: string;
   to: string;
   countOfPassengers: number;
+}
+
+export interface ISideBarItem {
+  path: PATHES;
+  IconSvg: React.FC<React.SVGProps<SVGSVGElement>>;
+  text: string;
 }

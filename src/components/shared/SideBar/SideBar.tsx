@@ -8,17 +8,13 @@ import { ReactComponent as ProfileSVG } from "@images/profile.svg";
 import { ReactComponent as LogoutSVG } from "@images/exit.svg";
 
 import { PATHES } from "@src/common/enum";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useAdmin } from "@src/hooks/useAdmin";
 import { useDidUpdateEffect } from "@src/hooks/useDidUpdateEffect";
 import { useAppDispatch } from "@src/store/hooks";
 import { logoutUser } from "@src/store/user/actions";
-
-interface ISideBarItem {
-  path: PATHES;
-  IconSvg: React.FC<React.SVGProps<SVGSVGElement>>;
-  text: string;
-}
+import { ISideBarItem } from "@src/common/interface";
+import SideBarItem from "./SideBarItem";
 
 const sideBarItems: ISideBarItem[] = [
   {
@@ -32,7 +28,7 @@ const sideBarItems: ISideBarItem[] = [
     text: "Admin Page",
   },
   {
-    path: PATHES.CREATE_TRIP_PAGE,
+    path: PATHES.TRIPS_PAGE,
     IconSvg: TripSVG,
     text: "Trips Page",
   },
@@ -75,24 +71,11 @@ const SideBar: React.FC = () => {
         {isOpen ? <CloseSVG /> : <BurgerSVG />}
       </div>
       <div className="sideBar__body d-flex flex-column mt-3">
-        {sideBarItems.map(({ text, path, IconSvg }) => {
-          if (path === PATHES.ADMIN_PAGE && !isAdmin) {
+        {sideBarItems.map((item) => {
+          if (item.path === PATHES.ADMIN_PAGE && !isAdmin) {
             return null;
           }
-          return (
-            <Link
-              to={path}
-              className={`sideBar__item d-flex align-items-center text-white text-decoration-none ${
-                path === selectItem ? "sideBar__item--active" : ""
-              }`}
-              key={path}
-            >
-              <div className="sideBar__item-icon">
-                <IconSvg />
-              </div>
-              <p>{text}</p>
-            </Link>
-          );
+          return <SideBarItem item={item} selectItem={selectItem} />;
         })}
         <div
           className="sideBar__item d-flex align-items-center sideBar__item--logout"

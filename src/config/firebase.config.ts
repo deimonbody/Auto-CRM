@@ -6,19 +6,13 @@ import {
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-// declare global {
-//   interface Window {
-//     recaptchaVerifier?: any;
-//   }
-// }
-
 const firebaseConfig = {
-  apiKey: "AIzaSyAxu9K6myaL8mHSJ037dBzPNic0oDtlAbQ",
-  authDomain: "auto-crm-b08b7.firebaseapp.com",
-  projectId: "auto-crm-b08b7",
-  storageBucket: "auto-crm-b08b7.appspot.com",
-  messagingSenderId: "285880070580",
-  appId: "1:285880070580:web:e5fbedc7f2609770cf82e1",
+  apiKey: process.env.REACT_APP_apiKey,
+  authDomain: process.env.REACT_APP_authDomain,
+  projectId: process.env.REACT_APP_projectId,
+  storageBucket: process.env.REACT_APP_storageBucket,
+  messagingSenderId: process.env.REACT_APP_messagingSenderId,
+  appId: process.env.REACT_APP_appId,
 };
 
 export const app = initializeApp(firebaseConfig);

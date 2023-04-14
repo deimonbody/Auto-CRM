@@ -37,7 +37,8 @@ export class UserService {
       const res = await signInWithEmailAndPassword(auth, email, password);
       return res.user;
     } catch (e) {
-      return Promise.reject(e);
+      const error = e as Error;
+      throw new Error(error.message);
     }
   }
 
@@ -48,7 +49,8 @@ export class UserService {
       const { user } = res;
       return user;
     } catch (e) {
-      return Promise.reject(e);
+      const error = e as Error;
+      throw new Error(error.message);
     }
   }
 
@@ -59,7 +61,8 @@ export class UserService {
       const { user } = res;
       return user;
     } catch (e) {
-      return Promise.reject(e);
+      const error = e as Error;
+      throw new Error(error.message);
     }
   }
 
@@ -91,7 +94,8 @@ export class UserService {
       }
       return await Promise.reject("User wasn`t register");
     } catch (e) {
-      return Promise.reject(e);
+      const error = e as Error;
+      throw new Error(error.message);
     }
   }
 
@@ -108,7 +112,8 @@ export class UserService {
       });
       return user;
     } catch (e) {
-      return Promise.reject(e);
+      const error = e as Error;
+      throw new Error(error.message);
     }
   }
 
@@ -117,7 +122,8 @@ export class UserService {
       await setDoc(doc(db, "users", user.userID), user);
       return true;
     } catch (e) {
-      return Promise.reject(e);
+      const error = e as Error;
+      throw new Error(error.message);
     }
   }
 
@@ -144,7 +150,8 @@ export class UserService {
       }
       return await Promise.reject("User didn`t register");
     } catch (e) {
-      return Promise.reject(e);
+      const error = e as Error;
+      throw new Error(error.message);
     }
   }
 
@@ -171,7 +178,8 @@ export class UserService {
       }
       return await Promise.reject("User didn`t register");
     } catch (e) {
-      return Promise.reject(e);
+      const error = e as Error;
+      throw new Error(error.message);
     }
   }
 
@@ -179,7 +187,8 @@ export class UserService {
     try {
       await signOut(auth);
     } catch (e) {
-      return Promise.reject(e);
+      const error = e as Error;
+      throw new Error(error.message);
     }
   }
 }
