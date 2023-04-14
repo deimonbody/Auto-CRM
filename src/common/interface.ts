@@ -8,3 +8,10 @@ export interface IUser {
   role: ROLE;
   userRole: UserRole;
 }
+
+export interface ITrip {
+  tripID: string;
+  from: string;
+  to: string;
+  countOfPassengers: number;
+}

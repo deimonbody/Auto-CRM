@@ -7,6 +7,7 @@ const UserProfile: React.FC = () => {
 
   return (
     <div className="py-3 pe-3">
+      <p className="page-title">Profile</p>
       <div className="container">
         <div className="row mb-4">
           <div className="col-6">
