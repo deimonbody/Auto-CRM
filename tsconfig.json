@@ -22,7 +22,9 @@
   },
   "include": [
     "src",
-    "src/images.d.ts"
+    "src/images.d.ts",
+    "src/index.d.ts"
   ],
+  "typeRoots": ["./src/types", "./types"],
   "extends": "./tsconfig.pathes.json"
 }
