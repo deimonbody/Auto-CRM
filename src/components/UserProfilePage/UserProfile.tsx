@@ -6,7 +6,7 @@ const UserProfile: React.FC = () => {
   const { user } = useAppSelector((state) => state.userReducer);
 
   return (
-    <div className="mainContent-layout">
+    <div className="py-3 pe-3">
       <div className="container">
         <div className="row mb-4">
           <div className="col-6">

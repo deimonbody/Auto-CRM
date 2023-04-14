@@ -8,7 +8,6 @@ import {
 import {
   FacebookAuthProvider,
   GoogleAuthProvider,
-  OAuthCredential,
   User,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -45,12 +44,8 @@ export class UserService {
   static async getUserAuthByGoogle(): Promise<User> {
     try {
       const res = await signInWithPopup(auth, googleProvider);
-      const credential = GoogleAuthProvider.credentialFromResult(
-        res,
-      ) as OAuthCredential;
-      const token = credential.accessToken;
+      GoogleAuthProvider.credentialFromResult(res);
       const { user } = res;
-      console.log("sign in by google", user, token);
       return user;
     } catch (e) {
       return Promise.reject(e);
@@ -60,12 +55,8 @@ export class UserService {
   static async getUserAuthByFaceBook(): Promise<User> {
     try {
       const res = await signInWithPopup(auth, faceBookProvider);
-      const credential = FacebookAuthProvider.credentialFromResult(
-        res,
-      ) as OAuthCredential;
-      const token = credential.accessToken;
+      FacebookAuthProvider.credentialFromResult(res);
       const { user } = res;
-      console.log("sign in by facebook", user, token);
       return user;
     } catch (e) {
       return Promise.reject(e);
