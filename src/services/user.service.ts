@@ -8,7 +8,6 @@ import {
 import {
   FacebookAuthProvider,
   GoogleAuthProvider,
-  OAuthCredential,
   User,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -38,37 +37,32 @@ export class UserService {
       const res = await signInWithEmailAndPassword(auth, email, password);
       return res.user;
     } catch (e) {
-      return Promise.reject(e);
+      const error = e as Error;
+      throw new Error(error.message);
     }
   }
 
   static async getUserAuthByGoogle(): Promise<User> {
     try {
       const res = await signInWithPopup(auth, googleProvider);
-      const credential = GoogleAuthProvider.credentialFromResult(
-        res,
-      ) as OAuthCredential;
-      const token = credential.accessToken;
+      GoogleAuthProvider.credentialFromResult(res);
       const { user } = res;
-      console.log("sign in by google", user, token);
       return user;
     } catch (e) {
-      return Promise.reject(e);
+      const error = e as Error;
+      throw new Error(error.message);
     }
   }
 
   static async getUserAuthByFaceBook(): Promise<User> {
     try {
       const res = await signInWithPopup(auth, faceBookProvider);
-      const credential = FacebookAuthProvider.credentialFromResult(
-        res,
-      ) as OAuthCredential;
-      const token = credential.accessToken;
+      FacebookAuthProvider.credentialFromResult(res);
       const { user } = res;
-      console.log("sign in by facebook", user, token);
       return user;
     } catch (e) {
-      return Promise.reject(e);
+      const error = e as Error;
+      throw new Error(error.message);
     }
   }
 
@@ -100,7 +94,8 @@ export class UserService {
       }
       return await Promise.reject("User wasn`t register");
     } catch (e) {
-      return Promise.reject(e);
+      const error = e as Error;
+      throw new Error(error.message);
     }
   }
 
@@ -117,7 +112,8 @@ export class UserService {
       });
       return user;
     } catch (e) {
-      return Promise.reject(e);
+      const error = e as Error;
+      throw new Error(error.message);
     }
   }
 
@@ -126,7 +122,8 @@ export class UserService {
       await setDoc(doc(db, "users", user.userID), user);
       return true;
     } catch (e) {
-      return Promise.reject(e);
+      const error = e as Error;
+      throw new Error(error.message);
     }
   }
 
@@ -153,7 +150,8 @@ export class UserService {
       }
       return await Promise.reject("User didn`t register");
     } catch (e) {
-      return Promise.reject(e);
+      const error = e as Error;
+      throw new Error(error.message);
     }
   }
 
@@ -180,7 +178,8 @@ export class UserService {
       }
       return await Promise.reject("User didn`t register");
     } catch (e) {
-      return Promise.reject(e);
+      const error = e as Error;
+      throw new Error(error.message);
     }
   }
 
@@ -188,7 +187,8 @@ export class UserService {
     try {
       await signOut(auth);
     } catch (e) {
-      return Promise.reject(e);
+      const error = e as Error;
+      throw new Error(error.message);
     }
   }
 }

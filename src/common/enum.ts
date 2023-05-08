@@ -3,7 +3,7 @@ export enum PATHES {
   REGISTER_PAGE = "/register",
   USER_PROFILE = "/user-profile",
   ADMIN_PAGE = "/admin",
-  CREATE_TRIP_PAGE = "/create-trip",
+  TRIPS_PAGE = "/trips",
 }
 
 export enum ROLE {

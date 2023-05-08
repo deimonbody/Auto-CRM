@@ -3,7 +3,7 @@ import { useAuthorization } from "@src/hooks/useAuthorization";
 import LoginPage from "@src/pages/LoginPage";
 import RegisterPage from "@src/pages/RegisterPage";
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import UserProfilePage from "@src/pages/UserProfilePage";
 import TripsPage from "@src/pages/TripsPage";
 import AdminPage from "@src/pages/AdminPage";
@@ -24,11 +24,12 @@ const Router: React.FC = () => {
       </Route>
       <Route element={<ProtectedRouteHOC isAuth={isAuth} />}>
         <Route path={PATHES.USER_PROFILE} element={<UserProfilePage />} />
-        <Route path={PATHES.CREATE_TRIP_PAGE} element={<TripsPage />} />
+        <Route path={PATHES.TRIPS_PAGE} element={<TripsPage />} />
       </Route>
       <Route element={<ProtectedAdminPageHOC isAdmin={isAdmin} />}>
         <Route path={PATHES.ADMIN_PAGE} element={<AdminPage />} />
       </Route>
+      <Route element={<Navigate to={PATHES.LOGIN_PAGE} />} path="/" />
     </Routes>
   );
 };

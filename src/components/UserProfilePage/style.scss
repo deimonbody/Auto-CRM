@@ -1,9 +1,15 @@
 .col-label {
     font-size: 1rem;
     font-family: "Montserrat-bold";
+    @media screen and (max-width:767px) {
+        font-size: 0.8rem;
+    }
 }
 
 .col-value {
     font-size: 0.8rem;
     font-family: "Montserrat-reg";
+    @media screen and (max-width:767px) {
+        font-size: 0.7rem;
+    }
 }

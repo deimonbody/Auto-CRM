@@ -6,6 +6,7 @@ import App from "./App/App";
 import { store } from "./store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.scss";
+import "react-toastify/dist/ReactToastify.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,

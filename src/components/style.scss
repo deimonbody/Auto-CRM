@@ -1,5 +1,8 @@
 .form{
     min-width: 500px;
+    @media screen and (max-width:767px) {
+        min-width: 320px;
+    }
 }
 
 .form__label {
@@ -23,10 +26,49 @@
     font-size: 0.9rem !important;
     font-family: "Montserrat-bold" !important;
     padding:8px 18px !important;
+    @media screen and (max-width:767px) {
+        font-size: 0.8rem !important;
+    }
 }
 
-.form__google-text{
-    font-family: "Montserrat-bold";
-    font-size: 0.8rem;
+.form__sign-in-by-medias-block{
     cursor: pointer;
+    p{
+        font-family: "Montserrat-bold";
+        font-size: 0.8rem;
+    }
+    svg{
+        margin-right: 10px;
+        width: 15px;
+        height: 15px;
+        fill:rgb(220,53,69);
+    }
+    @media screen and (max-width:767px) {
+        p{
+            font-size: 0.7rem;
+        }
+    }
+}
+
+.form__addition-text {
+     font-family: "Montserrat-bold";
+     font-size: 0.8rem;
+     @media screen and (max-width:767px) {
+        font-size: 0.7rem;
+    }
+}
+
+.page-title {
+    font-size: 1.4rem;
+    font-family: "Montserrat-bold";
+    @media screen and (max-width:767px) {
+        font-size: 1.1rem;
+    }
+}
+
+.my_table {
+    font-size:0.8rem;
+    thead th {
+        font-size: 0.9rem;   
+    }
 }

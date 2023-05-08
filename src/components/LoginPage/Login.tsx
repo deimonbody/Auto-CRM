@@ -2,13 +2,19 @@ import { loginSchema } from "@src/common/schemas";
 import React from "react";
 import { Form } from "react-bootstrap";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Button from "react-bootstrap/Button";
 import "./style.scss";
 import { useAppDispatch } from "@src/store/hooks";
 import { setUser } from "@src/store/user/actions";
-
+import { toast } from "react-toastify";
 import { UserService } from "@src/services/user.service";
+import { ReactComponent as GoogleSVG } from "@images/google.svg";
+import { ReactComponent as FaceBookSVG } from "@images/facebook.svg";
+
+import { Link } from "react-router-dom";
+import { PATHES } from "@src/common/enum";
+import Input from "../shared/Input/Input";
 
 interface IFromProps {
   email: string;
@@ -21,38 +27,60 @@ const Login: React.FC = () => {
   const { control, reset, handleSubmit } = useForm<IFromProps>({
     mode: "onChange",
     defaultValues: {
-      email: "dima.pavlov0311@gmail.com",
-      password: "goldvju81",
+      email: "",
+      password: "",
     },
     resolver: joiResolver(loginSchema),
   });
 
   const loginHandler = async (data: IFromProps) => {
-    const user = await UserService.getUserAuthByEmail({
-      email: data.email,
-      password: data.password,
-    });
-    const userFromDB = await UserService.getUserDBByID(user.uid);
-    if (userFromDB) {
-      dispatch(setUser(userFromDB));
+    try {
+      const user = await UserService.getUserAuthByEmail({
+        email: data.email,
+        password: data.password,
+      });
+
+      const userFromDB = await UserService.getUserDBByID(user.uid);
+      if (userFromDB) {
+        dispatch(setUser(userFromDB))
+          .unwrap()
+          .then(() => toast.success("Authorized"))
+          .catch(() => toast.error("Something went wrong :("));
+      }
+    } catch (e) {
+      toast.error("Something went wrong with authorization");
     }
 
     reset();
   };
 
   const signInByGoogle = async () => {
-    const user = await UserService.getUserAuthByGoogle();
-    const userFromDB = await UserService.getUserDBByID(user.uid);
-    if (userFromDB) {
-      dispatch(setUser(userFromDB));
+    try {
+      const user = await UserService.getUserAuthByGoogle();
+      const userFromDB = await UserService.getUserDBByID(user.uid);
+      if (userFromDB) {
+        dispatch(setUser(userFromDB))
+          .unwrap()
+          .then(() => toast.success("Authorized"))
+          .catch(() => toast.error("Something went wrong :("));
+      }
+    } catch (e) {
+      toast.error("Something went wrong with authorization");
     }
   };
 
   const sighInByFaceBook = async () => {
-    const user = await UserService.getUserAuthByFaceBook();
-    const userFromDB = await UserService.getUserDBByID(user.uid);
-    if (userFromDB) {
-      dispatch(setUser(userFromDB));
+    try {
+      const user = await UserService.getUserAuthByFaceBook();
+      const userFromDB = await UserService.getUserDBByID(user.uid);
+      if (userFromDB) {
+        dispatch(setUser(userFromDB))
+          .unwrap()
+          .then(() => toast.success("Authorized"))
+          .catch(() => toast.error("Something went wrong :("));
+      }
+    } catch (e) {
+      toast.error("Something went wrong with authorization");
     }
   };
 
@@ -60,60 +88,16 @@ const Login: React.FC = () => {
     <div className="d-flex flex-column justify-content-center align-items-center form">
       <p className="fs-3 fw-bold text-primary mb-3 form__title">Login</p>
       <Form className="d-flex flex-column justify-content-center  align-self-stretch">
-        <Controller
-          control={control}
-          name="email"
-          render={({
-            field: { onChange, value, name, ref },
-            fieldState: { error },
-          }) => (
-            <Form.Group className="mb-3">
-              <Form.Label
-                className={`form__label ${error ? "text-danger" : ""}`}
-              >
-                Email address or phone number
-              </Form.Label>
-              <Form.Control
-                className="form__input text-dark"
-                placeholder="Enter email or phone..."
-                onChange={onChange}
-                value={value}
-                ref={ref}
-                name={name}
-              />
-              {error ? (
-                <p className="form__error text-danger my-2">{error.message}</p>
-              ) : null}
-            </Form.Group>
-          )}
+        <Input
+          props={{ control, name: "email" }}
+          placeHolder="Enter your email..."
+          labelText="Your Email"
         />
 
-        <Controller
-          control={control}
-          name="password"
-          render={({
-            field: { onChange, onBlur, value, name, ref },
-            fieldState: { error },
-          }) => (
-            <Form.Group className="mb-3">
-              <Form.Label
-                className={`form__label ${error ? "text-danger" : ""}`}
-              >
-                Password
-              </Form.Label>
-              <Form.Control
-                className="form__input text-dark"
-                placeholder="Enter password..."
-                onChange={onChange}
-                value={value}
-                ref={ref}
-                name={name}
-              />
-              {error ? (
-                <p className="form__error text-danger my-2">{error.message}</p>
-              ) : null}
-            </Form.Group>
-          )}
+        <Input
+          props={{ control, name: "password" }}
+          placeHolder="Enter password..."
+          labelText="Your Password"
         />
 
         <Button
@@ -124,18 +108,17 @@ const Login: React.FC = () => {
           Enter
         </Button>
       </Form>
-      <p
-        onClick={signInByGoogle}
-        className="mt-3 form__google-text text-primary"
-      >
-        Sign in by Google
+      <p className="mt-3 aling-items-center text-primary form__addition-text">
+        Haven`t an account ? <Link to={PATHES.REGISTER_PAGE}>Register it</Link>
       </p>
-      <p
-        onClick={sighInByFaceBook}
-        className="mt-2 form__google-text text-primary"
-      >
-        Sign in by Facebook
-      </p>
+      <div className="mt-2 form__sign-in-by-medias-block d-flex aling-items-center text-danger">
+        <GoogleSVG />
+        <p onClick={signInByGoogle}>Sign in by Google</p>
+      </div>
+      <div className="mt-2 d-flex aling-items-center text-danger form__sign-in-by-medias-block">
+        <FaceBookSVG />
+        <p onClick={sighInByFaceBook}>Sign in by Facebook</p>
+      </div>
     </div>
   );
 };
