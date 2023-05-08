@@ -91,9 +91,10 @@ export const addTripSchema = joi.object({
     .min(1)
     .message("The count of passengers should be more than or equal 1")
     .required(),
-  tripID: joi
-    .string()
-    .required()
-    .min(5)
-    .message("The trip ID should be more than 5 symbols"),
+  driverSelector: joi.object().required().messages({
+    "object.base": "You have to choose some driver",
+  }),
+  managerSelector: joi.object().required().messages({
+    "object.base": "You have to choose some manager",
+  }),
 });

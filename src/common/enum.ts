@@ -16,3 +16,9 @@ export enum UserRole {
   USER = "user",
   ADMIN = "admin",
 }
+
+export enum TRIPSTATUS {
+  WAITING = "waiting",
+  IN_PROCESS = "processing",
+  DONE = "done",
+}

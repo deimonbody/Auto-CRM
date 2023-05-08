@@ -59,10 +59,10 @@
 }
 
 .page-title {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-family: "Montserrat-bold";
     @media screen and (max-width:767px) {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
 }
 
@@ -70,5 +70,38 @@
     font-size:0.8rem;
     thead th {
         font-size: 0.9rem;   
+    }
+}
+
+.selector-wrapper {
+    position: relative;
+
+    &.selector-wrapper__error{
+        div[class*="control"] {
+            border-color: red;
+            box-shadow:none ;
+        }
+    }
+    
+    .error{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    position: absolute;
+    left: 0;
+    bottom: -22px;
+
+    p {
+        font-size: 0.8rem;
+        color: red;
+        margin-bottom:0;
+    }
+
+    svg {
+        fill: red;
+        width: 12px;
+        height: 12px;
+        margin-right: 8px;
+    }
     }
 }
