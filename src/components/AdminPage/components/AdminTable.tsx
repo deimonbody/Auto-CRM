@@ -2,6 +2,7 @@ import { ROLE } from "@src/common/enum";
 import { IUser } from "@src/common/interface";
 import { getSelectUserRole } from "@src/helpers/getSelectUserRole";
 import { useAppDispatch } from "@src/store/hooks";
+import { setTrips } from "@src/store/trips/actions";
 import { updateUserRole } from "@src/store/users/actions";
 import React from "react";
 import { Table } from "react-bootstrap";
@@ -28,7 +29,10 @@ const AdminTable: React.FC<IProps> = ({ users }) => {
         }),
       )
         .unwrap()
-        .then(() => toast.success("Success,the role was changed"))
+        .then(() => {
+          toast.success("Success,the role was changed");
+          dispatch(setTrips());
+        })
         .catch(() => toast.error("Something went wrong :("));
     }
   };
